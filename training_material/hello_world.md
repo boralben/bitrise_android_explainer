@@ -35,3 +35,5 @@ Sources
  * gravity
  * layout_constraints
 1. Re-run the app
+1. Define label text programmatically
+ * Update `EditText` in `MainActivity::onCreate`

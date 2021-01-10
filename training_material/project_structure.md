@@ -1,6 +1,8 @@
 # Project Structure
 
-[Source](https://developer.android.com/studio/intro)
+Sources
+[Intro to Android Studio](https://developer.android.com/studio/intro)
+[Hello World Codelab](https://developer.android.com/codelabs/android-training-hello-world#3)
 
 ## Android Studio
 

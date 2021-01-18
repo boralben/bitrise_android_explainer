@@ -53,3 +53,14 @@ How does our app connect its behavior to the user's interaction with the device?
   * Add to build.gradle: `implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'`
   * Convert `ScreenInfo` to `ScreenInfoViewModel: ViewModel`
   * Convent `clickCount: Int` to `clickCount: LiveData<Int>`
+  
+ 6. Let's reset our counter if the user exits our app
+  * Make `ScreenInfoViewModel` lifecycle aware by implementing `LifeCycleObserver`
+  * Add:
+```kotlin
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun resetCounter() {
+        clickCount.value = 0
+    }
+```
+  * In `MainActivity` add `this.lifecycle.addObserver(viewModel)`

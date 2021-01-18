@@ -1,10 +1,9 @@
 package com.benboral.saucelabstraining
 
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 
-class ScreenInfoViewModel : ViewModel() {
+class ScreenInfoViewModel : ViewModel(), LifecycleObserver {
 
     val clickCount = MutableLiveData<Int>()
     val buttonText = "Click Me!"
@@ -15,6 +14,11 @@ class ScreenInfoViewModel : ViewModel() {
 
     fun incrementCount() {
         clickCount.value = clickCount.value?.plus(1)
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun resetCounter() {
+        clickCount.value = 0
     }
 
 }

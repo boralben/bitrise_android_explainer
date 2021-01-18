@@ -16,7 +16,9 @@ class MainActivity : AppCompatActivity() {
         Log.d(this::class.simpleName, "onCreate  - ${lifecycle.currentState.name}")
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(
             this, R.layout.activity_main)
-        binding.viewModel = ViewModelProvider(this).get(ScreenInfoViewModel::class.java)
+        val viewModel = ViewModelProvider(this).get(ScreenInfoViewModel::class.java)
+        this.lifecycle.addObserver(viewModel)
+        binding.viewModel = viewModel
         binding.setLifecycleOwner(this)
     }
 

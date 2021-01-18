@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,9 @@ class MainActivity : AppCompatActivity() {
         val labelText = resources.getString(R.string.text_hello_world)
         Log.d(this::class.simpleName, "Setting label to $labelText")
         findViewById<TextView>(R.id.main_TextView).text = labelText
+        findViewById<Button>(R.id.button_first).setOnClickListener {
+            Log.d(TAG, "logClick: CLICK ME! closure")
+        }
     }
 
     override fun onStart() {
@@ -51,9 +55,4 @@ class MainActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         Log.d(this::class.simpleName, "onRestoreInstanceState - ${lifecycle.currentState.name}")
     }
-
-    fun logClick(view: View) {
-        Log.d(TAG, "logClick: CLICK ME!")
-    }
-
 }

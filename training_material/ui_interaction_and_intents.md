@@ -14,7 +14,8 @@ How does our app connect its behavior to the user's interaction with the device?
  * constrain it to halfway between our text and the bottom of the screen
  * assign it text from `strings.xml`
  * play with appearance settings. Set some inset values in the attributes editor 
-2. Add a click handle
+2. Add a click handler
  * In `activity_main.xml`, add a clickHandler (`android:onClick`) `logClick` and have Android Studio autogenerate a function in `MainActivity.kt`
- 
+ * Remove the entry in the layout file and the `logClick` function
+ * Use `findViewById` and `setOnClickListener` to set a click listener entirely in code
  

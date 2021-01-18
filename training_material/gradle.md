@@ -41,3 +41,5 @@ The Android Build tool.
  * ./gradlew installDebug
  * Verification tasks -- coming soon!
  
+ 
+1. Write a custom task

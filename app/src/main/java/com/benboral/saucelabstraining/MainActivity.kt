@@ -3,9 +3,13 @@ package com.benboral.saucelabstraining
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+
+    private val TAG = "MainActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(this::class.simpleName, "onCreate  - ${lifecycle.currentState.name}")
@@ -46,6 +50,10 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         Log.d(this::class.simpleName, "onRestoreInstanceState - ${lifecycle.currentState.name}")
+    }
+
+    fun logClick(view: View) {
+        Log.d(TAG, "logClick: CLICK ME!")
     }
 
 }

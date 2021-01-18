@@ -3,9 +3,8 @@ package com.benboral.saucelabstraining
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import com.benboral.saucelabstraining.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,14 +13,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(this::class.simpleName, "onCreate  - ${lifecycle.currentState.name}")
-        setContentView(R.layout.activity_main)
 
-        val labelText = resources.getString(R.string.text_hello_world)
-        Log.d(this::class.simpleName, "Setting label to $labelText")
-        findViewById<TextView>(R.id.main_TextView).text = labelText
-        findViewById<Button>(R.id.button_first).setOnClickListener {
-            Log.d(TAG, "logClick: CLICK ME! closure")
-        }
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
+            this, R.layout.activity_main)
+
+        binding.screenInfo = ScreenInfo("Hello, World!", "Click Me!")
+        binding.activity = this
     }
 
     override fun onStart() {
@@ -54,5 +51,9 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         Log.d(this::class.simpleName, "onRestoreInstanceState - ${lifecycle.currentState.name}")
+    }
+
+    fun logClick() {
+        Log.d(TAG, "logClick: Button was clicked!")
     }
 }

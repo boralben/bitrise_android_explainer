@@ -4,6 +4,7 @@ A simple app to get us off the ground
 
 Sources
 [Codelab 1.1](https://developer.android.com/codelabs/android-training-hello-world?hl=en#3)
+[Layout XML](https://developer.android.com/codelabs/basic-android-kotlin-training-xml-layouts?hl=en#8)
 
 ## Steps
 

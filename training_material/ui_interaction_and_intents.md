@@ -3,6 +3,7 @@
 Sources:
 [Intents](https://developer.android.com/reference/android/content/Intent)
 [Button Interactions](https://developer.android.com/codelabs/android-training-layout-editor-part-a?hl=en#3)
+[Data Binding](https://developer.android.com/topic/libraries/data-binding)
 
 ## Introduction
 
@@ -18,4 +19,24 @@ How does our app connect its behavior to the user's interaction with the device?
  * In `activity_main.xml`, add a clickHandler (`android:onClick`) `logClick` and have Android Studio autogenerate a function in `MainActivity.kt`
  * Remove the entry in the layout file and the `logClick` function
  * Use `findViewById` and `setOnClickListener` to set a click listener entirely in code
+3. Data binding
+ * Querying the layout with `findViewById` is cumbersome, but worse, can lead to null pointer exceptions if we query the view for an invalid id
+ * Remove the code in `MainActivity.kt` to set the label text, the label entries in `strings.xml` and their usages in `activity_main.xml`
+ * Add the following block to `app/build.gradle` in the `android` section: `buildFeatures { dataBinding true }` and sync
+ * Create a `data class` called `ScreenInfo`
+ * Wrap the `ConstraintLayout` in a `Layout` with a `data` child block of type `ScreenInfo` with attributes `labelText` and `buttonText`
+ * In `activity_main.xml`, set the `android:text` values to "@{screenInfo.attrName}"
+ * In `MainActivity.kt`, change `setContentView` to:
+ ```kotlin
+        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
+            this, R.layout.activity_main)
+
+        binding.screenInfo = ScreenInfo("Hello, World!", "Click Me!")
+```
+ * Run the app
+ * Move the click listener code in `MainActivity.kt` to its own function called `logClick`
+ * Add `binding.activity = this`
+ * In activity_main.xml, add an activity data
+ * In activity_main.xml, add `android:onClick="@{() -> activity.logClick() }"`
  
+ (this only scratches the surface of data binding's capabilities)

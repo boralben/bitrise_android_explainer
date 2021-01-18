@@ -9,8 +9,6 @@ The Android Build tool.
 * Dependency Management
 * It's what is actually used by the IDE
 
-## Steps
-
 1. What are the big picture steps in the Android build process
 ![Build Process Diagram](build_process.png "Android Build Process")
 
@@ -32,6 +30,8 @@ The Android Build tool.
     * testInstrumentationRunner (we'll get to that later)
     * compileOptions -> sourceCompatibility/targetCompatibility
  * app/build.gradle dependencies (implementation/testImplementation/androidTestImplementation)
+
+## Steps
 
 1. In command line, run `./gradlew tasks`
  * ./gradlew sourceSets

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.benboral.saucelabstraining.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,12 +14,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(this::class.simpleName, "onCreate  - ${lifecycle.currentState.name}")
-
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(
             this, R.layout.activity_main)
-
-        binding.screenInfo = ScreenInfo("Hello, World!", "Click Me!")
-        binding.activity = this
+        binding.viewModel = ViewModelProvider(this).get(ScreenInfoViewModel::class.java)
+        binding.setLifecycleOwner(this)
     }
 
     override fun onStart() {
@@ -51,9 +50,5 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         Log.d(this::class.simpleName, "onRestoreInstanceState - ${lifecycle.currentState.name}")
-    }
-
-    fun logClick() {
-        Log.d(TAG, "logClick: Button was clicked!")
     }
 }

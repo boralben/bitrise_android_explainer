@@ -1,13 +1,14 @@
-# Handling UI Interactions And Intents
+# Handling UI Interactions 
 
 Sources:
 [Intents](https://developer.android.com/reference/android/content/Intent)
 [Button Interactions](https://developer.android.com/codelabs/android-training-layout-editor-part-a?hl=en#3)
 [Data Binding](https://developer.android.com/topic/libraries/data-binding)
+[Binding LiveData](https://developer.android.com/topic/libraries/data-binding/architecture)
 
 ## Introduction
 
-How does our app connect its behavior to the user's interaction with the device? And similarly, how is information transmitted between apps and between activities? 
+How does our app connect its behavior to the user's interaction with the device? 
 
 ## Handling UI Interactions
 
@@ -40,3 +41,15 @@ How does our app connect its behavior to the user's interaction with the device?
  * In activity_main.xml, add `android:onClick="@{() -> activity.logClick() }"`
  
  (this only scratches the surface of data binding's capabilities)
+ 
+ 4. Update `ScreenInfo` to count clicks and update the label text to the number of clicks
+  * Add a `incrementCount` function and a `clickCount` attribute
+  * update the `activity_main.xml` to call `incrementCount` and associate the label text with `String.valueOf(screenInfo.clickCount)`
+  * remote the activity from `<data>`
+  * Run the app. (The label isn't updating)
+ 
+ 5. Click Counting continued
+  * We'll need to use `LiveData` and `ViewModel`
+  * Add to build.gradle: `implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'`
+  * Convert `ScreenInfo` to `ScreenInfoViewModel: ViewModel`
+  * Convent `clickCount: Int` to `clickCount: LiveData<Int>`

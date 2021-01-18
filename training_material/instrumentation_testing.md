@@ -4,6 +4,8 @@ Sources
 [Instrumentation Tests](https://source.android.com/compatibility/tests/development/instrumentation)
 [Espresso](https://developer.android.com/training/testing/espresso)
 [ActivityScenario](https://developer.android.com/guide/components/activities/testing#recreate)
+[UIAutomator](https://developer.android.com/training/testing/ui-automator)
+[UIAutomater Sample Code](https://github.com/android/testing-samples/tree/main/ui/uiautomator/BasicSample)
 
 ## Introduction
 
@@ -106,4 +108,7 @@ class MainActivityTests{
     }
 ```
 
-
+1. Let's write a similar test using UIAutomator
+ * Introduce the Layout Inspector
+ * Show code in `MainActivityAutomatorTests.kt`
+ 

@@ -2,6 +2,7 @@
 
 Sources
 [Android Debug Bridge(adb)](https://developer.android.com/studio/command-line/adb)
+[Espresso Setup Commands](https://developer.android.com/training/testing/espresso/setup)
 
 ## ADB Components
  * client - runs on your machine and sends commands to the device
@@ -30,3 +31,12 @@ Sources
  * Check the Build tab to see the gradle commands used
  * Check the Run tab to see the adb command invoked (`adb shell am start -n "com.benboral.saucelabstraining/com.benboral.saucelabstraining.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER`)
  
+ ## One important set of commands
+ 
+ ```shell script
+adb shell settings put global window_animation_scale 0
+adb shell settings put global transition_animation_scale 0
+adb shell settings put global animator_duration_scale 0
+```
+
+Disable animations for UI tests

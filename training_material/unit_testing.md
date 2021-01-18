@@ -13,3 +13,19 @@ Sources
  * Run `./gradlew test --tests com.benboral.saucelabstraining.ExampleUnitTest.addition_isCorrect`
 
 1. Testing our ViewModel
+ * Write `ScreenInfoViewModelTests`
+ 
+ ```kotlin
+ class ScreenInfoViewModelTests {
+     @Test
+     fun incrementCount_updatesCountByOne() {
+         val viewModel = ScreenInfoViewModel()
+         assertEquals(0, viewModel.clickCount)
+         viewModel.incrementCount()
+         assertEquals(1, viewModel.clickCount)
+     }
+ }
+```
+
+ * Run the test: `RuntimeException: Method getMainLooper in android.os.Looper not mocked`
+ * Explain the looper and lack of mocking. 

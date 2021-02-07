@@ -1,0 +1,113 @@
+---
+format_version: '8'
+default_step_lib_source: 'https://github.com/bitrise-io/bitrise-steplib.git'
+project_type: android
+trigger_map:
+- push_branch: release/*
+  workflow: deploy
+- push_branch: '*'
+  workflow: primary
+- pull_request_source_branch: '*'
+  workflow: primary
+workflows:
+
+  primary:
+    description: Checks out latest and runs tests
+    before_run:
+      - checkout_from_cache
+      - quick_verify
+    after_run:
+      - publish_bitrise_artifacts
+
+  deploy:
+    description: Release to Play Store
+    before_run:
+      - checkout_from_cache
+      - quick_verify
+      - ui_test
+    steps:
+      - script@1:
+          title: Set version
+          inputs:
+            - content: |-
+                #!/usr/bin/env bash
+                set -e
+                git symbolic-ref --short HEAD | cut -d\/ -f2 | tr -d '\n' | envman add --key NEW_VERSION_NAME
+      - change-android-versioncode-and-versionname@1:
+          inputs:
+            - new_version_name: "$NEW_VERSION_NAME"
+            - version_code_offset: '1'
+            - build_gradle_path: $PROJECT_LOCATION/$MODULE/build.gradle
+      - android-build@0:
+          inputs:
+            - project_location: $PROJECT_LOCATION
+            - module: $MODULE
+            - variant: $VARIANT_RELEASE
+      - sign-apk@1:
+          run_if: '{{getenv "BITRISEIO_ANDROID_KEYSTORE_URL" | ne ""}}'
+      - google-play-deploy@3.2:
+          inputs:
+            - package_name: $PACKAGE_NAME
+            - track: production
+            - app_path: $BITRISE_SIGNED_APK_PATH
+            - service_account_json_key_path: $BITRISEIO_GOOGLE_PLAY_JSON_KEY_PATH_URL
+    after_run:
+      - publish_bitrise_artifacts
+
+  checkout_from_cache:
+    steps:
+    - activate-ssh-key@4:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4: {}
+    - cache-pull@2: {}
+
+  quick_verify:
+    description: Lint and Unit Tests
+    steps:
+    - android-lint@0:
+        inputs:
+        - project_location: $PROJECT_LOCATION
+        - module: $MODULE
+        - variant: $VARIANT_DEBUG
+    - android-unit-test@1:
+        inputs:
+          - project_location: $PROJECT_LOCATION
+          - module: $MODULE
+          - variant: $VARIANT_DEBUG
+
+  ui_test:
+    description: Run UI tests on virtual devices
+    steps:
+      - android-build-for-ui-testing@0:
+          inputs:
+            - variant: $VARIANT_DEBUG
+            - module: $MODULE
+      - virtual-device-testing-for-android@1:
+          inputs:
+            - inst_use_orchestrator: 'true'
+            - test_type: instrumentation
+            - inst_test_runner_class: ''
+            - test_devices: Pixel2,29,en,portrait
+
+  publish_bitrise_artifacts:
+    steps:
+      - deploy-to-bitrise-io@1: {}
+      - cache-push@2: {}
+
+app:
+  envs:
+  - opts:
+      is_expand: false
+    PROJECT_LOCATION: .
+  - opts:
+      is_expand: false
+    MODULE: app
+  - opts:
+      is_expand: false
+    VARIANT_DEBUG: debug
+  - opts:
+      is_expand: false
+    VARIANT_RELEASE: release
+  - opts:
+      is_expand: false
+    PACKAGE_NAME: com.benboral.bitriseexplainer

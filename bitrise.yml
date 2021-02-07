@@ -15,7 +15,7 @@ workflows:
     description: Checks out latest and runs tests
     before_run:
       - checkout_from_cache
-      - verify
+      - quick_verify
     after_run:
       - publish_bitrise_artifacts
 
@@ -23,7 +23,8 @@ workflows:
     description: Release to Play Store
     before_run:
       - checkout_from_cache
-      - verify
+      - quick_verify
+      - ui_test
     steps:
       - script@1:
           title: Set version
@@ -60,29 +61,33 @@ workflows:
     - git-clone@4: {}
     - cache-pull@2: {}
 
-  verify:
-    description: Unit and UI Tests
+  quick_verify:
+    description: Lint and Unit Tests
     steps:
     - android-lint@0:
         inputs:
         - project_location: $PROJECT_LOCATION
         - module: $MODULE
         - variant: $VARIANT_DEBUG
-        - android-unit-test@1:
-            inputs:
-            - project_location: $PROJECT_LOCATION
-            - module: $MODULE
+    - android-unit-test@1:
+        inputs:
+          - project_location: $PROJECT_LOCATION
+          - module: $MODULE
+          - variant: $VARIANT_DEBUG
+
+  ui_test:
+    description: Run UI tests on virtual devices
+    steps:
+      - android-build-for-ui-testing@0:
+          inputs:
             - variant: $VARIANT_DEBUG
-    - android-build-for-ui-testing@0:
-        inputs:
-        - variant: $VARIANT_DEBUG
-        - module: $MODULE
-    - virtual-device-testing-for-android@1:
-        inputs:
-        - inst_use_orchestrator: 'true'
-        - test_type: instrumentation
-        - inst_test_runner_class: ''
-        - test_devices: 'Pixel2,29,en,portrait'
+            - module: $MODULE
+      - virtual-device-testing-for-android@1:
+          inputs:
+            - inst_use_orchestrator: 'true'
+            - test_type: instrumentation
+            - inst_test_runner_class: ''
+            - test_devices: Pixel2,29,en,portrait
 
   publish_bitrise_artifacts:
     steps:

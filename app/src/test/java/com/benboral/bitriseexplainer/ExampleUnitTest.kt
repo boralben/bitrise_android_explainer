@@ -1,4 +1,4 @@
-package com.benboral.saucelabstraining
+package com.benboral.bitriseexplainer
 
 import org.junit.Test
 
@@ -17,6 +17,6 @@ class ExampleUnitTest {
 
     @Test
     fun subtraction_isCorrect() {
-        assertEquals(4, 5-2)
+        assertEquals(4, 5-1)
     }
 }

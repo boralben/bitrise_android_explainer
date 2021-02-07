@@ -31,7 +31,7 @@ Sources
 ## Steps
 
 1. Run `ExampleInstrumentedTest`
- * Observe the adb command used in "Run": `adb shell am instrument -w -m    -e debug false -e class 'com.benboral.saucelabstraining.ExampleInstrumentedTest#useAppContext' com.benboral.saucelabstraining.test/androidx.test.runner.AndroidJUnitRunner`
+ * Observe the adb command used in "Run": `adb shell am instrument -w -m    -e debug false -e class 'com.benboral.bitriseexplainer.ExampleInstrumentedTest#useAppContext' com.benboral.bitriseexplainer.test/androidx.test.runner.AndroidJUnitRunner`
  * Read the assertion and understand what's being accessed
 
 Now let's write our own...

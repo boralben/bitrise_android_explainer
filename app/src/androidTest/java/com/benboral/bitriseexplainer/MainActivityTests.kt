@@ -1,4 +1,4 @@
-package com.benboral.saucelabstraining
+package com.benboral.bitriseexplainer
 
 
 import androidx.test.espresso.Espresso.onView

@@ -1,4 +1,4 @@
-package com.benboral.saucelabstraining
+package com.benboral.bitriseexplainer
 
 import android.content.Context
 import android.content.Intent
@@ -23,7 +23,7 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class MainActivityAutomatorTests {
 
-    val PACKAGE_NAME = "com.benboral.saucelabstraining"
+    val PACKAGE_NAME = "com.benboral.bitriseexplainer"
     val DEFAULT_TIMEOUT = 5000L
 
     private lateinit var device: UiDevice
@@ -63,7 +63,7 @@ class MainActivityAutomatorTests {
         // Use PackageManager to get the launcher package name
         val pm = getApplicationContext<Context>().packageManager
         val resolveInfo = pm.resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY)
-        return resolveInfo.activityInfo.packageName
+        return resolveInfo!!.activityInfo.packageName
     }
 
     @Test

@@ -11,7 +11,7 @@ Sources
  * Run with `./gradlew app:testDebugUnitTest`
  * Fix the test
  * Add a failing test `subtraction_isCorrect`
- * Run `./gradlew test --tests com.benboral.saucelabstraining.ExampleUnitTest.addition_isCorrect`
+ * Run `./gradlew test --tests com.benboral.bitriseexplainer.ExampleUnitTest.addition_isCorrect`
 
 1. Testing our ViewModel
  * Write `ScreenInfoViewModelTests`

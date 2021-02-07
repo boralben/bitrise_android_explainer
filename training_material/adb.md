@@ -29,7 +29,7 @@ Sources
  
  * Click the play button in Android Studio
  * Check the Build tab to see the gradle commands used
- * Check the Run tab to see the adb command invoked (`adb shell am start -n "com.benboral.saucelabstraining/com.benboral.saucelabstraining.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER`)
+ * Check the Run tab to see the adb command invoked (`adb shell am start -n "com.benboral.bitriseexplainer/com.benboral.bitriseexplainer.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER`)
  
  ## One important set of commands
  

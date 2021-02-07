@@ -1,11 +1,11 @@
-package com.benboral.saucelabstraining
+package com.benboral.bitriseexplainer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.benboral.saucelabstraining.databinding.ActivityMainBinding
+import com.benboral.bitriseexplainer.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
+        savedInstanceState?.let { super.onRestoreInstanceState(it) }
         Log.d(this::class.simpleName, "onRestoreInstanceState - ${lifecycle.currentState.name}")
     }
 }

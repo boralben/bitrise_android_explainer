@@ -1,4 +1,4 @@
-package com.benboral.saucelabstraining
+package com.benboral.bitriseexplainer
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.benboral.saucelabstraining", appContext.packageName)
+        assertEquals("com.benboral.bitriseexplainer", appContext.packageName)
     }
 }
